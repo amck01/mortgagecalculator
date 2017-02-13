@@ -49,7 +49,7 @@ public class Mortgage {
 		this.monthlyPayments = monthlyPayments;
 	}
 
-	public double calculateFullAmount() {
+	public double calculateMonthlyPayment() {
 		return this.principal * ((this.interestRate / 12) * Math.pow((1 + (this.interestRate / 12)), this.termInMonths) /
 				(Math.pow(1 + (this.interestRate / 12), this.termInMonths) - 1));
 	}

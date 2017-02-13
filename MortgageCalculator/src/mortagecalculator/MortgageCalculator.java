@@ -15,7 +15,7 @@ public class MortgageCalculator {
 		Mortgage mortgage = new Mortgage(principal, interestRate, termInYears);
 		
 		//System.out.println(mortgage.calculateFullAmount());
-		System.out.printf("%.2f", mortgage.calculateFullAmount());
+		System.out.printf("%.2f", mortgage.calculateMonthlyPayment());
 	}
 	
 	public void asciiBanner() {
