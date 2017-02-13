@@ -1,26 +1,16 @@
 package mortagecalculator;
 
-import java.util.Scanner;
-
 public class MortgageCalculator {
 	
 	public void run() {
 		
 		asciiBanner();
 		
-		Scanner sc = new Scanner(System.in);
+		double principal = MortgageUtil.getDouble("Principal");
 		
-		System.out.print("Loan amount: ");
-		int principal = sc.nextInt();
-		System.out.print("\n");
+		double interestRate = MortgageUtil.getDouble("Interest rate");
 		
-		System.out.print("Interest rate: ");
-		float interestRate = sc.nextFloat();
-		System.out.print("\n");
-		
-		System.out.print("Term In Years: ");
-		int termInYears = sc.nextInt();
-		System.out.print("\n");
+		int termInYears = MortgageUtil.getInt("Term In Years");
 		
 		Mortgage mortgage = new Mortgage(principal, interestRate, termInYears);
 		
