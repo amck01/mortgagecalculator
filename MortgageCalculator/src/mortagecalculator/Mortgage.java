@@ -1,14 +1,19 @@
 package mortagecalculator;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+
 public class Mortgage {
 	
-	private double principal;
+	private BigDecimal principal;
 	private double interestRate;
 	private int termInYears;
 	private int termInMonths;
 	private double[] monthlyPayments;
 	
-	public Mortgage(double principal, double interestRate, int termInYears) {
+	public Mortgage() {}
+	
+	public Mortgage(BigDecimal principal, double interestRate, int termInYears) {
 		this.principal = principal;
 		this.interestRate = interestRate;
 		this.termInMonths = termInYears * 12;
@@ -16,10 +21,10 @@ public class Mortgage {
 	
 	
 	//Getters and setters
-	public double getPrincipal() {
+	public BigDecimal getPrincipal() {
 		return principal;
 	}
-	public void setPrincipal(double principal) {
+	public void setPrincipal(BigDecimal principal) {
 		this.principal = principal;
 	}
 	public double getInterestRate() {
@@ -49,9 +54,9 @@ public class Mortgage {
 		this.monthlyPayments = monthlyPayments;
 	}
 
-	public double calculateMonthlyPayment() {
-		return this.principal * ((this.interestRate / 12) * Math.pow((1 + (this.interestRate / 12)), this.termInMonths) /
-				(Math.pow(1 + (this.interestRate / 12), this.termInMonths) - 1));
+	public BigDecimal calculateMonthlyPayment() {
+		return new BigDecimal(this.principal.doubleValue() * (((this.interestRate / 12) * Math.pow((1 + (this.interestRate / 12)), this.termInMonths) /
+				(Math.pow(1 + (this.interestRate / 12), this.termInMonths) - 1))));
 	}
 	
 	public double[] generatePaymentSchedule() {
