@@ -9,26 +9,17 @@ public class MortgageCalculatorDAO {
 	Connection db;
 	
 	public MortgageCalculatorDAO() {
-		
 		try {
-			
 			Class.forName("org.postgresql.Driver");
-		
 		} catch (ClassNotFoundException e) {
-			
 			System.out.println("Missing PostgreSQL JDBC Driver");
 			e.printStackTrace();
-		
 		}
 		
 		try {
-		
 			db = DriverManager.getConnection("jdbc:postgresql://localhost/mortgagecalculator","postgres","postgres");
-		
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
-		
 		}
 		
 		if(db != null) {
@@ -37,7 +28,6 @@ public class MortgageCalculatorDAO {
 	}
 	
 	public Mortgage getMortgage(int mortgageId) {
-		
 		BigDecimal principal = null;
 		double interestRate = 0;
 		int termInYears = 0;
@@ -58,11 +48,8 @@ public class MortgageCalculatorDAO {
 		}	
 		
 		if (principal == null && interestRate == 0 && termInYears == 0) {
-			
 			return new Mortgage();
-		
 		} else {
-		
 			Mortgage mortgage = new Mortgage(principal, interestRate, termInYears);
 			return mortgage;
 		}
