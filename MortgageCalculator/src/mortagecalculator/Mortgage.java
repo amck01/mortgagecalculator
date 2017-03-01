@@ -2,6 +2,7 @@ package mortagecalculator;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 public class Mortgage {
 	
@@ -9,14 +10,16 @@ public class Mortgage {
 	private double interestRate;
 	private int termInYears;
 	private int termInMonths;
-	private double[] monthlyPayments;
+	private double monthlyPayment;
 	
 	public Mortgage() {}
 	
 	public Mortgage(BigDecimal principal, double interestRate, int termInYears) {
 		this.principal = principal;
 		this.interestRate = interestRate;
+		this.termInYears = termInYears;
 		this.termInMonths = termInYears * 12;
+		this.monthlyPayment = calculateMonthlyPayment().doubleValue();
 	}
 	
 	
@@ -47,20 +50,26 @@ public class Mortgage {
 		this.termInMonths = termInMonths;
 	}
 
-	public double[] getMonthlyPayments() {
-		return monthlyPayments;
+	public double getMonthlyPayment() {
+		return monthlyPayment;
 	}
-	public void setMonthlyPayments(double[] monthlyPayments) {
-		this.monthlyPayments = monthlyPayments;
+	public void setMonthlyPayments(double monthlyPayment) {
+		this.monthlyPayment = monthlyPayment;
 	}
 
 	public BigDecimal calculateMonthlyPayment() {
-		return new BigDecimal(this.principal.doubleValue() * (((this.interestRate / 12) * Math.pow((1 + (this.interestRate / 12)), this.termInMonths) /
-				(Math.pow(1 + (this.interestRate / 12), this.termInMonths) - 1))));
+		return new BigDecimal(this.principal.doubleValue() * ((((this.interestRate / 100) / 12) * Math.pow((1 + ((this.interestRate / 100) / 12)), this.termInMonths) /
+				(Math.pow(1 + ((this.interestRate / 100) / 12), this.termInMonths) - 1))));
 	}
 	
-	public double[] generatePaymentSchedule() {
-		return monthlyPayments;
+	public double generatePaymentSchedule() {
+		return getMonthlyPayment();
 		
+	}
+
+	@Override
+	public String toString() {
+		return "Mortgage [principal=" + principal + ", interestRate=" + interestRate + ", termInYears=" + termInYears
+				+ ", termInMonths=" + termInMonths + ", monthlyPayments=" + "]";
 	}
 }
