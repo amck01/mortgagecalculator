@@ -19,24 +19,21 @@ public class MortgageCalculator {
 
     public void menu() {
         final String[] menuItems = { "Calculate Mortgage Payment", "View Previous Mortgage Calculation", "Exit" };
-
-        for (int i = 1; i <= menuItems.length; i++) {
-            System.out.println(i + ": " + menuItems[i - 1]);
-        }
-
-        final int menuChoice = MortgageUtil.getInt("\nChoice");
-        if (menuChoice == 1) {
-            calculateMortgage();
-            redirectToMenu();
-        } else if (menuChoice == 2) {
-            viewPreviousMortgage();
-            redirectToMenu();
-        } else if (menuChoice == 3) {
-            return;
-        } else {
-            System.out.println("\nInvalid selection.\n");
-            menu();
-        }
+        int menuChoice;
+        
+        do {
+            for (int i = 1; i <= menuItems.length; i++) {
+                System.out.println(i + ": " + menuItems[i - 1]);
+            }
+            menuChoice = MortgageUtil.getInt("\nChoice");
+            if (menuChoice == 1) {
+                calculateMortgage();
+            } else if (menuChoice == 2) {
+                viewPreviousMortgage();
+            } else if (menuChoice < 1 && menuChoice > menuItems.length){
+                System.out.println("\nInvalid selection.\n");
+            } 
+        } while (menuChoice != 3);
     }
 
     public void calculateMortgage() {
